@@ -6,6 +6,7 @@
 <body onload='init()'>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
+<button id="scene3" class="sceneBtn">How do other Makes compare -></button>
 
 <script>
 
@@ -63,6 +64,31 @@ svg.selectAll("mybar")
     .attr("height", function(d) { return height - y(d.AverageHighwayMPG); })
     .attr("fill", "#69b3a2")
 
+	
+	svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Average Highway MPG for EV Makers");
+
+}
+
+const element = document.getElementById("scene3");
+element.addEventListener("click", goToScene3);
+
+function goToScene3() {
+  window.location.href = "fuelBar.html";
 }
 
 </script>
+
+<style>
+
+
+       .sceneBtn {
+			margin-left: 25%;
+       }
+
+      </style>

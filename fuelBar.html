@@ -46,6 +46,7 @@ var y = d3.scaleLinear()
 svg.append("g")
   .call(d3.axisLeft(y));
 
+const EVs = ["BMW", "Chevrolet", "Fiat", "Ford", "Hyundai", "Kia", "Mercedes-Benz", "Mitsubishi", "Nissan", "Tesla"];
 // Bars
 svg.selectAll("mybar")
   .data(data)
@@ -56,7 +57,7 @@ svg.selectAll("mybar")
     .attr("width", x.bandwidth())
     .attr("height", function(d) { return height - y(d.AverageHighwayMPG); })
     .attr("fill", function(d) {
-    if (d.Make === "BMW") {
+    if (EVs.indexOf(d.Make) !== -1) {
       return "red";
     } else {
       return "#69b3a2";

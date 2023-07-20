@@ -11,6 +11,13 @@
 
 async function init() {
 	data = await d3.csv("https://flunky.github.io/cars2017.csv");
+	const onlyE = [];
+	for(let i of data) {
+		if(i.Fuel === "Electricity") {
+			onlyE.push(i);
+		}
+	}
+	data = onlyE;
 	
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 70, left: 60},

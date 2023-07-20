@@ -7,6 +7,7 @@
 <body onload='init()'>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
+<button id="scene2" class="sceneBtn">Which companies make electric cars -></button>
 
 <script>
 
@@ -97,4 +98,20 @@ d3.select("svg")
 
 }
 
+const element = document.getElementById("scene2");
+element.addEventListener("click", goToScene2);
+
+function goToScene2() {
+  window.location.href = "bar.html";
+}
+
 </script>
+
+<style>
+
+
+       .sceneBtn {
+			margin-left: 25%;
+       }
+
+      </style>

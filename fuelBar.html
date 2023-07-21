@@ -113,7 +113,30 @@ svg.append("text")
 		
 const type = d3.annotationLabel
 
+const annotations = [{
+  note: {
+    label: "Electric Vehicle Makers have a higher Avg. Highway MPG, even when you factor in their Gasoline and Diesel models.",
+    bgPadding: 10,
+  },
+  //can use x, y directly instead of data
+  x: 650,
+  y: 100,
+  className: "show-bg",
+  color: "red",
+}]
 
+const makeAnnotations = d3.annotation()
+  .editMode(false)
+  //also can set and override in the note.padding property
+  //of the annotation object
+  .notePadding(20)
+  .type(type)
+  .annotations(annotations)
+
+d3.select("svg")
+  .append("g")
+  .attr("class", "annotation-group")
+  .call(makeAnnotations)
 
 }
 

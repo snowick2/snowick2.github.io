@@ -94,6 +94,10 @@ svg.selectAll("mybar")
     .style("font-family", "sans-serif")
 		.html("<b>"+d.Make+"</b>"+"<br>"+"Average Highway MPG: " + d.AverageHighwayMPG);
 	})
+  .on("click", function(d, i){
+    console.log("hiu");
+    window.location.href = `maker.html?make=${d.Make}`;
+  })
     .attr("fill", function(d) {
     if (EVs.indexOf(d.Make) !== -1) {
       return "red";

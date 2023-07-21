@@ -15,6 +15,29 @@
 
 async function init() {
 	data = await d3.csv("https://flunky.github.io/cars2017.csv");
+  let makes = []
+  let makesData = []
+  for(let i of data) {
+    if(makes.indexOf(i.Make) === -1){
+      makes.push(i.Make)
+      makesData.push({
+        Make: i.Make,
+        AverageHighwayMPG: Number(i.AverageHighwayMPG),
+        count: 1
+      })
+    } else {
+      for(let e = 0; e < makesData.length; e++) {
+        if(makesData[e].Make === i.Make) {
+          makesData[e].AverageHighwayMPG = Number(makesData[e].AverageHighwayMPG) + Number(i.AverageHighwayMPG)
+          makesData[e].count++
+        }
+      }
+    }
+  }
+  for (let i = 0; i < makesData.length; i++) {
+    makesData[i].AverageHighwayMPG = makesData[i].AverageHighwayMPG / makesData[i].count;
+  }
+  data = makesData
 	
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 70, left: 60},
@@ -85,7 +108,7 @@ svg.append("text")
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
-        .text("Average Highway MPG by Make");
+        .text("Average Highway MPG by Make all Fuel Types");
 		
 		
 const type = d3.annotationLabel

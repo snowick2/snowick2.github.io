@@ -6,7 +6,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js" integrity="sha512-iBAeBWWWFb8HqSBcrqcz98iIpuVH1la39dEYHtyQ/pGpeCQTQVvLJOWAuhv2Q7JSHp9k7hWA7sGxU3hHJe+tFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <body onload='init()'>
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="my_dataviz">
+  <div id="tooltip" name="tooltip" opacity=0></div>
+</div>
+
 
 <script>
 
@@ -47,6 +50,7 @@ svg.append("g")
   .call(d3.axisLeft(y));
 
 const EVs = ["BMW", "Chevrolet", "Fiat", "Ford", "Hyundai", "Kia", "Mercedes-Benz", "Mitsubishi", "Nissan", "Tesla"];
+const tooltip = d3.select("#tooltip");
 // Bars
 svg.selectAll("mybar")
   .data(data)
@@ -56,6 +60,17 @@ svg.selectAll("mybar")
     .attr("y", function(d) { return y(d.AverageHighwayMPG); })
     .attr("width", x.bandwidth())
     .attr("height", function(d) { return height - y(d.AverageHighwayMPG); })
+	.on("mouseover", function(d,i) {
+		tooltip.style("opacity", 1)
+		.style("left",(d3.event.pageX)+"px")
+		.style("top",(d3.event.pageY)+"px")
+    .style("position", "absolute")
+    .style("background-color", "pink")
+    .style("padding", "10px")
+    .style("font-size", "12px")
+    .style("font-family", "sans-serif")
+		.html("<b>"+d.Make+"</b>"+"<br>"+"Average Highway MPG: " + d.AverageHighwayMPG);
+	})
     .attr("fill", function(d) {
     if (EVs.indexOf(d.Make) !== -1) {
       return "red";

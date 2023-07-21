@@ -5,7 +5,9 @@
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <body onload='init()'>
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="my_dataviz">
+  <div id="tooltip" name="tooltip" opacity=0></div>
+</div>
 <button id="scene3" class="sceneBtn">How do other Makes compare -></button>
 
 <script>
@@ -54,6 +56,7 @@ svg.append("g")
   .call(d3.axisLeft(y));
 
 // Bars
+const tooltip = d3.select("#tooltip");
 svg.selectAll("mybar")
   .data(data)
   .enter()
@@ -63,6 +66,17 @@ svg.selectAll("mybar")
     .attr("width", x.bandwidth())
     .attr("height", function(d) { return height - y(d.AverageHighwayMPG); })
     .attr("fill", "#69b3a2")
+    .on("mouseover", function(d,i) {
+		tooltip.style("opacity", 1)
+		.style("left",(d3.event.pageX)+"px")
+		.style("top",(d3.event.pageY)+"px")
+    .style("position", "absolute")
+    .style("background-color", "pink")
+    .style("padding", "10px")
+    .style("font-size", "12px")
+    .style("font-family", "sans-serif")
+		.html("<b>"+d.Make+"</b>"+"<br>"+"Average Highway MPG: " + d.AverageHighwayMPG);
+	})
 
 	
 	svg.append("text")

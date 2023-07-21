@@ -95,7 +95,6 @@ svg.selectAll("mybar")
 		.html("<b>"+d.Make+"</b>"+"<br>"+"Average Highway MPG: " + d.AverageHighwayMPG);
 	})
   .on("click", function(d, i){
-    console.log("hiu");
     window.location.href = `maker.html?make=${d.Make}`;
   })
     .attr("fill", function(d) {

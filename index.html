@@ -13,6 +13,40 @@
 
 async function init() {
 	data = await d3.csv("https://flunky.github.io/cars2017.csv");
+	let gas = 0;
+	let diesel = 0;
+	let elec = 0;
+	let gc = 0;
+	let dc = 0;
+	let ec = 0;
+	for(let i of data) {
+		if(i.Fuel === "Gasoline") {
+			gas = gas + Number(i.AverageHighwayMPG )
+			gc++;
+		}
+		if(i.Fuel === "Diesel") {
+			diesel = diesel + Number(i.AverageHighwayMPG);
+			dc++;
+		}
+		if(i.Fuel === "Electricity") {
+			elec = elec + Number(i.AverageHighwayMPG);
+			ec++;
+		}
+	}
+	data = [
+		{
+			Fuel: "Gasoline",
+			AverageHighwayMPG: gas / gc
+		},
+		{
+			Fuel: "Diesel",
+			AverageHighwayMPG: diesel / dc
+		},
+		{
+			Fuel: "Electricity",
+			AverageHighwayMPG: elec / ec
+		},
+	]
 	
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 70, left: 60},
@@ -71,7 +105,7 @@ const type = d3.annotationLabel
 
 const annotations = [{
   note: {
-    label: "Looks like electric cars are a lot more efficient...",
+    label: "At 101.5 Average Highway MPG, looks like electric cars are a lot more efficient...",
     bgPadding: 20,
   },
   //can use x, y directly instead of data

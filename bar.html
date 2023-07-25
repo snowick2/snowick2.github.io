@@ -3,6 +3,7 @@
 
 <!-- Load d3.js -->
 <script src='https://d3js.org/d3.v5.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js" integrity="sha512-iBAeBWWWFb8HqSBcrqcz98iIpuVH1la39dEYHtyQ/pGpeCQTQVvLJOWAuhv2Q7JSHp9k7hWA7sGxU3hHJe+tFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <body onload='init()'>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz">
@@ -87,6 +88,32 @@ svg.selectAll("mybar")
         .style("text-decoration", "underline")  
         .text("Average Highway MPG for Electric Vehicles by Make");
 
+
+        const type = d3.annotationLabel
+
+  const annotations = [{
+    note: {
+      label: "All EVs in our data set have an Average Highway MPG greater than 95.",
+      bgPadding: 10,
+    },
+    //can use x, y directly instead of data
+    x: 650,
+    y: 100,
+    className: "show-bg",
+  }]
+
+  const makeAnnotations = d3.annotation()
+    .editMode(false)
+    //also can set and override in the note.padding property
+    //of the annotation object
+    .notePadding(20)
+    .type(type)
+    .annotations(annotations)
+
+  d3.select("svg")
+    .append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations)
 }
 
 const element = document.getElementById("scene3");

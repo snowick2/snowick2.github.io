@@ -78,6 +78,15 @@ svg.selectAll("mybar")
     .style("font-family", "sans-serif")
 		.html("<b>"+d.Make+"</b>"+"<br>"+"Average EV Highway MPG: " + d.AverageHighwayMPG);
 	})
+  .on("mouseleave", function(d, i) {
+    tooltip.style("opacity", 0)
+  })
+  tooltip.on("mouseover", function(d, i) {
+    tooltip.style("opacity", 1)
+  })
+  tooltip.on("mouseleave", function(d, i) {
+    tooltip.style("opacity", 0)
+  })
 
 	
 	svg.append("text")
@@ -130,6 +139,7 @@ function goToScene3() {
 
        .sceneBtn {
 			margin-left: 25%;
+      cursor: pointer;
        }
 
       </style>

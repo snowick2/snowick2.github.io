@@ -84,6 +84,15 @@ svg.selectAll("mybar")
     .style("font-family", "sans-serif")
 		.html("<b>"+d.Make+"</b>"+"<br>"+"Average Highway MPG: " + d.AverageHighwayMPG +"<br>"+"Average City MPG: " + d.AverageCityMPG +"<br>"+"Fuel: "+d.Fuel+"<br>"+"Engine Cylinders: "+d.EngineCylinders);
 	})
+  .on("mouseleave", function(d, i) {
+    tooltip.style("opacity", 0)
+  })
+  tooltip.on("mouseover", function(d, i) {
+    tooltip.style("opacity", 1)
+  })
+  tooltip.on("mouseleave", function(d, i) {
+    tooltip.style("opacity", 0)
+  })
 
 	
 	svg.append("text")

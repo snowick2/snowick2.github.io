@@ -94,6 +94,9 @@ svg.selectAll("mybar")
     .style("font-family", "sans-serif")
 		.html("<b>"+d.Make+"</b>"+"<br>"+"Average Highway MPG: " + d.AverageHighwayMPG+"<br><i>" + "Click to bar show more" +"</i>");
 	})
+  .on("mouseleave", function(d, i) {
+    tooltip.style("opacity", 0)
+  })
   .on("click", function(d, i){
     window.location.href = `maker.html?make=${d.Make}`;
   })
@@ -105,6 +108,12 @@ svg.selectAll("mybar")
     }
 	})
   .attr("cursor", "pointer" );
+  tooltip.on("mouseover", function(d, i) {
+    tooltip.style("opacity", 1)
+  })
+  tooltip.on("mouseleave", function(d, i) {
+    tooltip.style("opacity", 0)
+  })
 	
 svg.append("text")
         .attr("x", (width / 2))             
